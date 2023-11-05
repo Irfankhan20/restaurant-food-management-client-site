@@ -1,7 +1,72 @@
-import { Link } from "react-router-dom";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
+import app from "../firebase/firebase.config";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
+const auth = getAuth(app);
 const Login = () => {
+    const{signInUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+   
+    const provider = new GoogleAuthProvider();
+    const from = location?.state?.from.pathname || '/'
+
+    //login with google
+    const handleGoogleSignIn=()=>{
+        signInWithPopup(auth,provider)
+        .then(result=>{
+            console.log(result.data);
+            navigate(from,{replace:true})
+            toast.success('Successfully logged in');
+
+        })
+        .catch(err=>{console.log(err);});
+    }
+
+    const handleLogIn = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const value = {email, password}
+        console.log(value);
+
+        //signIn user
+        signInUser(email,password)
+        .then(result => {
+            console.log(result.user);
+
+            toast.success("Login successful!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+
+            // navigate after login
+            navigate(location?.state ? location.state : '/');
+        })
+        .catch(error => {
+            console.error(error);
+
+            toast.error("Login failed. Please check your email and password.", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        });
+
+    }
+
     return (
         <div className="">
               
@@ -18,7 +83,7 @@ const Login = () => {
                     <div className="md:w-1/2 w-full ">
                         <div className="card flex-shrink-0 w-full">
                             <h2 className="text-center  text-3xl font-bold">Login Now</h2>
-                            <form className="card-body">
+                            <form onSubmit={handleLogIn} className="card-body">
                                 <div className="form-control ">
                                     <label className="label">
                                         <span className="label-text text-lg">Email</span>
@@ -47,7 +112,7 @@ const Login = () => {
                                 <div className='text-center  mt-6'>
                                     <p className='text-lg  divider '>Or Connect With</p>
                                     <div className='my-4'>
-                                        <button className='px-4'>
+                                        <button  onClick={handleGoogleSignIn} className='px-4'>
                                             <img className='w-10' src="https://i.ibb.co/ftwyb00/Google-G-Logo-svg.png" alt="" />
                                         </button>
                                         <button className='px-4'>
@@ -65,6 +130,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

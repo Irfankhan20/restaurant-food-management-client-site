@@ -3,20 +3,20 @@
 
 
 
-
-
+import { useContext } from 'react';
 import './Navbar.css'
 import { Link, NavLink, } from 'react-router-dom';
-
-
-
-
-
+import { AuthContext } from '../Provider/AuthProvider';
 
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
 
-    
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch(err => console.log(err))
+    }
 
 
     return (
@@ -74,9 +74,9 @@ const Navbar = () => {
                                         Blog
                                     </NavLink>
                                 </li>
-                                
-                                
-                                
+
+
+
                             </ul>
                         </div>
                         <Link className="md:w-3/12 w-8/12"><img src="https://i.ibb.co/2gytMjj/logo.png" alt="" /></Link>
@@ -112,19 +112,36 @@ const Navbar = () => {
                                     Blog
                                 </NavLink>
                             </>
-                            
-                            
+
+
 
                         </ul>
                     </div>
-                    <div className="navbar-end rounded-full">
-                    <NavLink
-                                    to="/login"
-                                    className="normal-case font-semibold text-xl text-white"
-                                    activeClassName="active"
-                                >
-                                    Login
-                                </NavLink>
+                    <div className="navbar-end">
+                        <div className="hidden md:block">
+                            <div className="ml-4 flex items-center md:ml-6">
+                                {user ? (
+                                    <div className="flex items-center">
+                                        <img className='rounded-full w-8 h-8 mr-3' src={user.photoURL} alt={user.displayName} />
+                                        <span data-tip={user.displayName} className="text-white">{user.displayName}</span>
+                                        <button onClick={handleLogOut} className="text-xl text-white px-3 font-medium ml-3">
+                                            Logout
+                                        </button>
+
+
+                                    </div>
+                                ) : (
+                                    <NavLink to="/login"
+                                    className="text-white" activeClassName="active">
+                                        <button className="text-xl px-3 font-medium">
+                                            Login
+                                        </button>
+                                    </NavLink>
+                                )}
+
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,57 +1,156 @@
-import { Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
-    const handleRegister = e =>{
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from.pathname || '/'
+
+    const handleRegister = e => {
         e.preventDefault();
+        const accepted = e.target.terms.checked;
+        console.log(accepted);
         const form = e.target;
         const name = form.name.value;
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        const registerValue = {name,photo,email,password};
+        //show toast if password length less 6 digit
+        if (password.length < 6) {
+
+            toast.error('Password must be at least 6 characters long', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
+            });
+            return;
+        }
+
+        //accept terms and condition toast
+        if (!accepted) {
+            
+            toast.error('Please accept the Terms and Conditions', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+            return;
+        }
+        const registerValue = { name, photo, email, password };
         console.log(registerValue);
+
+        //createUser
+        createUser(email,password)
+        .then(result =>{
+            console.log(result.user);
+            handleUpdateUser(name, photo);
+
+            //if userCreate successful
+            toast.success('Registration successful!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+
+               
+            });
+            navigate(from,{replace:true})
+        })
+        .catch(error=>{
+            console.error(error);
+
+            //if userCreate error
+            toast.error('Registration failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        })
+
+        const handleUpdateUser = (name, photo) => {
+            const profile = {
+              displayName: name,
+              photoURL: photo,
+            };
+            console.log( profile)
+            updateUserProfile(profile)
+              .then(() => {})
+              .catch((error) => console.error(error));
+          };
     }
     return (
         <div>
-            
+
             <div className='my-16 md:my-20 md:w-10/12 w-11/12 mx-auto'>
                 <div className="bg-[#f8b3d1] container mx-auto lg:flex lg:flex-row items-center md:p-16 py-8 rounded-3xl  shadow-2xl">
                     <div className="md:w-1/2 w-full ">
                         <div className="card flex-shrink-0 w-full">
-                        <h2 className="text-center  text-3xl font-bold">Register Now</h2>
+                            <h2 className="text-center  text-3xl font-bold">Register Now</h2>
                             <form onSubmit={handleRegister} className="card-body">
                                 {/* name box */}
-                                <div className="form-control">
+                                <div className="form-control ">
                                     <label className="label">
                                         <span className="label-text text-lg">Name</span>
                                     </label>
-                                    <input type="text" name='name' placeholder="Your Name" className="input input-bordered shadow-xl" />
+                                    <div className='indicator w-full flex-col'>
+                                    
+                                    <input type="text" name='name' placeholder="Your Name" className="input input-bordered" required />
+                                    </div>
                                 </div>
                                 {/* photo box */}
-                                <div className="form-control">
+                                <div className="form-control ">
                                     <label className="label">
-                                        <span className="label-text text-lg">photo Url</span>
+                                        <span className="label-text text-lg">Photo URL</span>
                                     </label>
-                                    <input type="text" name='photo' placeholder="Your Photo" className="input input-bordered shadow-xl" />
+                                    <div className='indicator w-full flex-col'>
+                                    
+                                    <input type="text" name='photo' placeholder="Your Photo URL" className="input input-bordered" required />
+                                    </div>
                                 </div>
                                 {/* email box */}
-                                <div className="form-control">
+                                <div className="form-control ">
                                     <label className="label">
                                         <span className="label-text text-lg">Email</span>
                                     </label>
-                                    <input type="email" name='email' placeholder="Your Email" className="input input-bordered shadow-xl" required />
+                                    <div className='indicator w-full flex-col'>
+                                    <span className="indicator-item badge bg-[#E21B70] text-white border-none">Required</span>
+                                    <input type="email" name='email' placeholder="Your Email" className="input input-bordered" required />
+                                    </div>
                                 </div>
                                 {/* password box */}
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text text-lg">Password</span>
                                     </label>
-                                    <input type="password" name='password' placeholder="Password" className="input input-bordered shadow-xl" required />
+
+                                   <div className='indicator w-full flex-col'>
+                                    <span className="indicator-item badge bg-[#E21B70] text-white border-none">Required</span>
+                                    <input type="password" name='password' placeholder="Password" className="input input-bordered" required />
+                                    </div>
+
+                                    {/* terms and condition  */}
+                                    <div className="mb-3 mt-3">
+                                        <input type="checkbox" name="terms" id="terms" />
+                                        <label className="ml-2 font-medium" htmlFor="terms">Accept Our <a className="text-[#E21B70]" href="">Terms and condition</a> </label>
+                                    </div>
+                                    
+                                    
                                 </div>
                                 {/* register btn  */}
                                 <div className="mt-6 form-control">
-                                <button className=" bg-[#fc3d90] hover:bg-[#E21B70] px-10 hover:text-white text-white font-bold text-lg py-2 rounded-lg shadow-2xl duration-300">Register</button>
+                                    <button className=" bg-[#fc3d90] hover:bg-[#E21B70] px-10 hover:text-white text-white font-bold text-lg py-2 rounded-lg shadow-2xl duration-300">Register</button>
                                 </div>
                                 {/* login toggle */}
                                 <div className='text-center  mt-6'>
@@ -72,6 +171,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
