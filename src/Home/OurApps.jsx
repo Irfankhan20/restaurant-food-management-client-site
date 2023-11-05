@@ -3,7 +3,7 @@ import { FaAppStore } from "react-icons/fa";
 
 const OurApps = () => {
     return (
-        <div>
+        <div className="mt-32 mb-32">
             <h2 className=' text-2xl md:text-5xl md:mb-8 mb-6 text-center'>Put us in your pocket</h2>
             <div className="bg-[#E21B70] p-11 flex shadow-xl w-full">
 
