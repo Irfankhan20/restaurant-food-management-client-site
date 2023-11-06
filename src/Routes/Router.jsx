@@ -6,6 +6,9 @@ import Blog from "../Blog/Blog";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import AddFoodItem from "../AddFoodItem/AddFoodItem";
+import PrivateRoutes from "./PrivateRoutes";
+
 
 
 const router = createBrowserRouter([
@@ -33,6 +36,14 @@ const router = createBrowserRouter([
           {
               path: '/register',
               element: <Register></Register>
+          },
+          {
+              path: '/additem',
+              element: <AddFoodItem></AddFoodItem>
+          },
+          {
+              path: '/addafooditem',
+              element: <PrivateRoutes><AddFoodItem></AddFoodItem></PrivateRoutes>
           }
         ]
     },

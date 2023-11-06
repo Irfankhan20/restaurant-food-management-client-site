@@ -11,12 +11,15 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-
+    // const [isDropdownOpen, setDropdownOpen] = useState(false);
     const handleLogOut = () => {
         logOut()
             .then()
             .catch(err => console.log(err))
     }
+
+    //when user clicks on him profile
+
 
 
     return (
@@ -74,6 +77,17 @@ const Navbar = () => {
                                         Blog
                                     </NavLink>
                                 </li>
+                                { user?.email && <li>
+                                    <NavLink
+                                        to="/addafooditem"
+                                        className="normal-case text-xl text-white"
+                                        activeClassName="active"
+                                    >
+                                        Add A Food Item
+                                    </NavLink>
+                                </li>}
+
+                                
 
 
 
@@ -112,18 +126,33 @@ const Navbar = () => {
                                     Blog
                                 </NavLink>
                             </>
+                            { user?.email && <>
+                                <NavLink
+                                    to="/addafooditem"
+                                    className="normal-case text-xl text-white"
+                                    activeClassName="active"
+                                >
+                                    Add A Food Item
+                                </NavLink>
+                            </>}
+
+                            
 
 
 
                         </ul>
                     </div>
+
                     <div className="navbar-end">
                         <div className="hidden md:block">
                             <div className="ml-4 flex items-center md:ml-6">
                                 {user ? (
                                     <div className="flex items-center">
-                                        <img className='rounded-full w-8 h-8 mr-3' src={user.photoURL} alt={user.displayName} />
-                                        <span data-tip={user.displayName} className="text-white">{user.displayName}</span>
+                                        <button className='flex items-center'>
+                                            <img className=' rounded-full w-8 h-8 mr-3' src={user.photoURL} alt={user.displayName} />
+                                            <span data-tip={user.displayName} className="text-white">{user.displayName}</span>
+                                        </button>
+
                                         <button onClick={handleLogOut} className="text-xl text-white px-3 font-medium ml-3">
                                             Logout
                                         </button>
@@ -132,7 +161,7 @@ const Navbar = () => {
                                     </div>
                                 ) : (
                                     <NavLink to="/login"
-                                    className="text-white" activeClassName="active">
+                                        className="text-white" activeClassName="active">
                                         <button className="text-xl px-3 font-medium">
                                             Login
                                         </button>
@@ -145,7 +174,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            {/* navbar  */}
+
         </div>
     );
 };
