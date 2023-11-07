@@ -4,50 +4,47 @@ import AllFoodItem from "./AllFoodItem";
 
 
 const AllFoodItems = () => {
-    
+
     const [foodItems, setFoodItems] = useState([]);
+    // const [searchFoodItems, setSearchFoodItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
-     //------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------
     //  pagination code 
     const [currentPage, setCurrentPage] = useState(0);
     const [count, setCount] = useState(0);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch('http://localhost:5000/foodItemsCount')
-        .then(res=>res.json())
-        .then(data=>{
-            setCount(data.count);
-        
-        })
-    },[])
+            .then(res => res.json())
+            .then(data => {
+                setCount(data.count);
+
+            })
+    }, [])
     // console.log(count);
     // const count = 10;
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const numberOfPages = Math.ceil(count / itemsPerPage);
     const pages = [...Array(numberOfPages).keys()];
 
-    const handleItemsPerPage = e =>{
+    const handleItemsPerPage = e => {
         const val = parseInt(e.target.value);
         console.log(val);
         setItemsPerPage(val);
         setCurrentPage(0);
     }
-    const handlePrevPage = () =>{
-        if(currentPage > 0){
+    const handlePrevPage = () => {
+        if (currentPage > 0) {
             setCurrentPage(currentPage - 1);
         }
     }
     const handleNextPage = () => {
-        if(currentPage < pages.length - 1){
+        if (currentPage < pages.length - 1) {
             setCurrentPage(currentPage + 1);
         }
     }
-    //------------------------------------------------------------------------
-    // search and banner and card code 
-    const handleSearchChange = (event) => {
-        setSearchValue(event.target.value);
-    };
 
     const url = `http://localhost:5000/allfoods?page=${currentPage}&size=${itemsPerPage}`;
     useEffect(() => {
@@ -55,8 +52,24 @@ const AllFoodItems = () => {
             .then(res => res.json())
             .then(data => {
                 setFoodItems(data)
+                // console.log(data);
             })
-    }, [url,currentPage,itemsPerPage])
+    }, [url, currentPage, itemsPerPage])
+
+    //------------------------------------------------------------------------
+    // search and banner and card code 
+    const handleSearchChange = (event) => {
+        setSearchValue(event.target.value);
+    };
+
+    // const urlForSearch = 'http://localhost:5000/allfoods';
+    // useEffect(() => {
+    //     fetch(urlForSearch)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setSearchFoodItems(data)
+    //         })
+    // }, [urlForSearch])
 
     // Filter food items based on the search input
     const filteredFoodItems = foodItems.filter(foodItem => {
@@ -174,17 +187,17 @@ const AllFoodItems = () => {
 
             {/* pagination div */}
             <div className="text-center mb-10 ">
-            <button className="bg-white p-2 rounded-lg mr-4 hover:bg-[#E21B70]  hover:text-white text-[#fc3d90] border-2 border-[#E21B70]" onClick={handlePrevPage}>Prev</button>
+                <button className="bg-white p-2 rounded-lg mr-4 hover:bg-[#E21B70]  hover:text-white text-[#fc3d90] border-2 border-[#E21B70]" onClick={handlePrevPage}>Prev</button>
                 {
-                    pages.map(page=><button
-                         className={currentPage === page ? 'bg-[#E21B70] text-white rounded-full p-2 px-4 ml-5 mr-5' : undefined}
-                    
-                     key={page}
-                     onClick={()=> setCurrentPage(page)}
-                     >{page}</button>)
+                    pages.map(page => <button
+                        className={currentPage === page ? 'bg-[#E21B70] text-white rounded-full p-2 px-4 ml-4 mr-4' : 'mr-4 ml-4'}
+
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                    >{page}</button>)
                 }
                 <button className="bg-white p-2 rounded-lg ml-4 hover:bg-[#E21B70]  hover:text-white text-[#fc3d90] border-2 border-[#E21B70]" onClick={handleNextPage}>Next</button>
-                <select className="border-2 ml-2  border-[#E21B70] text-white bg-[#E21B70] " value={itemsPerPage} onChange={handleItemsPerPage}  name="" id="">
+                <select className="border-2 ml-2  border-[#E21B70] text-white bg-[#E21B70] " value={itemsPerPage} onChange={handleItemsPerPage} name="" id="">
                     <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="5">5</option>
                     <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="10">10</option>
                     <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="20">20</option>
