@@ -8,6 +8,7 @@ import Register from "../Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import AddFoodItem from "../AddFoodItem/AddFoodItem";
 import PrivateRoutes from "./PrivateRoutes";
+import SingleFoodPage from "../SingleFoodPage/SingleFoodPage";
 // import PrivateRoutes from "./PrivateRoutes";
 // import Profile from "../Profile/Profile";
 
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
           },
           {
               path: '/allfooditems',
-              element: <AllFoodItems></AllFoodItems>
+              element: <AllFoodItems></AllFoodItems>,
+            //   loader: () => fetch('http://localhost:5000/foodItemsCount')
           },
           {
               path: '/blog',
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
           {
               path: '/register',
               element: <Register></Register>
+          },
+          {
+              path: '/singlefoodpage',
+              element: <SingleFoodPage></SingleFoodPage>
           },
           {
               path: '/addfooditem',

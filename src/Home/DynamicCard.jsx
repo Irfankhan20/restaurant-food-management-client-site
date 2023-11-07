@@ -15,7 +15,7 @@ const DynamicCard = ({foodItem}) => {
             <p>Price : {foodItem.price} TK</p>
   
             <div className="card-actions justify-end">
-              <Link>
+              <Link to='/singlefoodpage'>
                 <button className='border border-[#E21B70] rounded-full px-4 py-2 hover:bg-[#E21B70] hover:text-white duration-300'>Details</button>
               </Link>
             </div>

@@ -1,23 +1,62 @@
 import { useEffect, useState } from "react";
 import AllFoodItem from "./AllFoodItem";
+// import { useLoaderData } from "react-router-dom";
 
 
 const AllFoodItems = () => {
+    
     const [foodItems, setFoodItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
+     //------------------------------------------------------------------------
+    //  pagination code 
+    const [currentPage, setCurrentPage] = useState(0);
+    const [count, setCount] = useState(0);
+
+    useEffect(()=>{
+        fetch('http://localhost:5000/foodItemsCount')
+        .then(res=>res.json())
+        .then(data=>{
+            setCount(data.count);
+        
+        })
+    },[])
+    // console.log(count);
+    // const count = 10;
+    const [itemsPerPage, setItemsPerPage] = useState(9);
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+    const pages = [...Array(numberOfPages).keys()];
+
+    const handleItemsPerPage = e =>{
+        const val = parseInt(e.target.value);
+        console.log(val);
+        setItemsPerPage(val);
+        setCurrentPage(0);
+    }
+    const handlePrevPage = () =>{
+        if(currentPage > 0){
+            setCurrentPage(currentPage - 1);
+        }
+    }
+    const handleNextPage = () => {
+        if(currentPage < pages.length - 1){
+            setCurrentPage(currentPage + 1);
+        }
+    }
+    //------------------------------------------------------------------------
+    // search and banner and card code 
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
     };
 
-    const url = 'http://localhost:5000/allfoods';
+    const url = `http://localhost:5000/allfoods?page=${currentPage}&size=${itemsPerPage}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
             .then(data => {
                 setFoodItems(data)
             })
-    }, [url])
+    }, [url,currentPage,itemsPerPage])
 
     // Filter food items based on the search input
     const filteredFoodItems = foodItems.filter(foodItem => {
@@ -30,13 +69,13 @@ const AllFoodItems = () => {
 
             {/* slider div  */}
             <div>
-                <div className="carousel w-full h-[400px]">
+                <div className="carousel w-full h-[500px]">
                     {/*  */}
 
                     <div id="slide1" className="carousel-item relative w-full ">
-                        <img className="w-full rounded-lg" src="https://i.ibb.co/whcGY7k/spicy-1.jpg" alt="" />
+                        <img className="w-full" src="https://i.ibb.co/whcGY7k/spicy-1.jpg" alt="" />
                         {/* banner1 text,btn */}
-                        <div className='absolute flex items-center rounded-lg h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
+                        <div className='absolute flex items-center h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
                             {/* banner text1*/}
                             <div className='text-white space-y-7 pl-12 w-full'>
                                 <h2 className='text-6xl font-semibold'>All Food Items</h2>
@@ -57,9 +96,9 @@ const AllFoodItems = () => {
                     </div>
 
                     <div id="slide2" className="carousel-item relative w-full">
-                        <img src="https://i.ibb.co/K9bQxw9/pizza.jpg" className="w-full rounded-lg" />
+                        <img src="https://i.ibb.co/K9bQxw9/pizza.jpg" className="w-full" />
                         {/* banner2 text,btn */}
-                        <div className='absolute flex items-center rounded-lg h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
+                        <div className='absolute flex items-center h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
                             {/* banner text*/}
                             <div className='text-white space-y-7 pl-12 w-full'>
                                 <h2 className='text-6xl font-semibold'>All Food Items</h2>
@@ -79,9 +118,9 @@ const AllFoodItems = () => {
                     </div>
 
                     <div id="slide3" className="carousel-item relative w-full">
-                        <img src="https://i.ibb.co/nmCv4bL/dessert-item.jpg" className="w-full rounded-lg" />
+                        <img src="https://i.ibb.co/nmCv4bL/dessert-item.jpg" className="w-full" />
                         {/* banner3 text,btn */}
-                        <div className='absolute flex items-center rounded-lg h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
+                        <div className='absolute flex items-center h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
                             {/* banner text*/}
                             <div className='text-white space-y-7 pl-12 w-full'>
                                 <h2 className='text-6xl font-semibold'>All Food Items</h2>
@@ -101,9 +140,9 @@ const AllFoodItems = () => {
                     </div>
 
                     <div id="slide4" className="carousel-item relative w-full">
-                        <img src="https://i.ibb.co/YjkbjFJ/salad-potatoes-and-bread1.jpg" className="w-full rounded-lg" />
+                        <img src="https://i.ibb.co/YjkbjFJ/salad-potatoes-and-bread1.jpg" className="w-full " />
                         {/* banner4 text,btn */}
-                        <div className='absolute flex items-center rounded-lg h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
+                        <div className='absolute flex items-center h-full left-0 top-0  bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]'>
                             {/* banner text1*/}
                             <div className='text-white space-y-7 pl-12 w-full'>
                                 <h2 className='text-6xl font-semibold'>All Food Items</h2>
@@ -133,9 +172,29 @@ const AllFoodItems = () => {
                 )}
             </div>
 
+            {/* pagination div */}
+            <div className="text-center mb-10 ">
+            <button className="bg-white p-2 rounded-lg mr-4 hover:bg-[#E21B70]  hover:text-white text-[#fc3d90] border-2 border-[#E21B70]" onClick={handlePrevPage}>Prev</button>
+                {
+                    pages.map(page=><button
+                         className={currentPage === page ? 'bg-[#E21B70] text-white rounded-full p-2 px-4 ml-5 mr-5' : undefined}
+                    
+                     key={page}
+                     onClick={()=> setCurrentPage(page)}
+                     >{page}</button>)
+                }
+                <button className="bg-white p-2 rounded-lg ml-4 hover:bg-[#E21B70]  hover:text-white text-[#fc3d90] border-2 border-[#E21B70]" onClick={handleNextPage}>Next</button>
+                <select className="border-2 ml-2  border-[#E21B70] text-white bg-[#E21B70] " value={itemsPerPage} onChange={handleItemsPerPage}  name="" id="">
+                    <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="5">5</option>
+                    <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="10">10</option>
+                    <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="20">20</option>
+                    <option className="hover:text-[#E21B70] hover:bg-white hover:border-[#E21B70]" value="50">50</option>
+                </select>
+            </div>
+
 
         </div>
-        
+
     );
 };
 

@@ -107,7 +107,7 @@ const Login = () => {
                                     </label>
                                 </div>
                                 <div className="mt-6 form-control">
-                                    <button className=" bg-[#fc3d90] hover:bg-[#E21B70] px-10 hover:text-white text-white font-bold text-lg py-2 rounded-lg shadow-2xl duration-300">Login</button>
+                                    <button className=" bg-[#fc3d90] hover:bg-[#E21B70]  hover:text-white text-white font-bold text-lg py-2 px-10 rounded-lg shadow-2xl duration-300">Login</button>
                                 </div>
                                 <div className='text-center  mt-6'>
                                     <p className='text-lg  divider '>Or Connect With</p>
