@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const DynamicCard = ({foodItem}) => {
+    // const{id} = foodItem;
     return (
         <div className='my-16 md:w-94 w-11/12 mx-auto'>
         <div className="card bg-base-100 shadow-xl">
@@ -15,7 +16,7 @@ const DynamicCard = ({foodItem}) => {
             <p>Price : {foodItem.price} TK</p>
   
             <div className="card-actions justify-end">
-              <Link to='/singlefoodpage'>
+              <Link to={`/singlefoodpage/${foodItem?._id}`}>
                 <button className='border border-[#E21B70] rounded-full px-4 py-2 hover:bg-[#E21B70] hover:text-white duration-300'>Details</button>
               </Link>
             </div>

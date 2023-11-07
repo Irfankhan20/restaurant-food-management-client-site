@@ -42,8 +42,9 @@ const router = createBrowserRouter([
               element: <Register></Register>
           },
           {
-              path: '/singlefoodpage',
-              element: <SingleFoodPage></SingleFoodPage>
+              path: '/singlefoodpage/:id',
+              element: <SingleFoodPage></SingleFoodPage>,
+              loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
           },
           {
               path: '/addfooditem',
