@@ -8,6 +8,8 @@ import Register from "../Register/Register";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import AddFoodItem from "../AddFoodItem/AddFoodItem";
 import PrivateRoutes from "./PrivateRoutes";
+// import PrivateRoutes from "./PrivateRoutes";
+// import Profile from "../Profile/Profile";
 
 
 
@@ -38,15 +40,27 @@ const router = createBrowserRouter([
               element: <Register></Register>
           },
           {
-              path: '/additem',
-              element: <AddFoodItem></AddFoodItem>
-          },
-          {
-              path: '/addafooditem',
+              path: '/addfooditem',
               element: <PrivateRoutes><AddFoodItem></AddFoodItem></PrivateRoutes>
-          }
+          },
+          
+          
+        //   {
+        //       path: '/profile',
+        //       element: <Profile></Profile>,
+        //       children:[
+                
+        //             {
+        //                 path: '/addafooditem',
+        //                 element:<AddFoodItem></AddFoodItem>
+        //             }
+                
+        //       ]
+        //   }
+
         ]
-    },
+
+    }
   ]);
 
   export default router;

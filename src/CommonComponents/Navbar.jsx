@@ -50,7 +50,7 @@ const Navbar = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className="menu gap-8 items-center menu-compact dropdown-content mt-3 shadow bg-orange-600 rounded w-40"
+                                className="menu gap-8 items-center menu-compact dropdown-content mt-3 shadow bg-[#E21B70] rounded w-40"
                             >
                                 <li>
                                     <NavLink
@@ -79,13 +79,14 @@ const Navbar = () => {
                                 </li>
                                 { user?.email && <li>
                                     <NavLink
-                                        to="/addafooditem"
+                                        to="/addfooditem"
                                         className="normal-case text-xl text-white"
                                         activeClassName="active"
                                     >
-                                        Add A Food Item
+                                        Add Food Item
                                     </NavLink>
                                 </li>}
+                                
 
                                 
 
@@ -93,7 +94,7 @@ const Navbar = () => {
 
                             </ul>
                         </div>
-                        <Link className="md:w-3/12 w-8/12"><img src="https://i.ibb.co/2gytMjj/logo.png" alt="" /></Link>
+                        <Link to='/' className="md:w-3/12 w-8/12"><img src="https://i.ibb.co/sWYLxcN/Whats-App-Image-2023-11-06-at-6-45-52-PM.jpg" alt="" /></Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal gap-8 items-center px-1">
@@ -107,16 +108,18 @@ const Navbar = () => {
                                     Home
                                 </NavLink>
                             </>
-
                             <>
                                 <NavLink
+                                    exact
                                     to="/allfooditems"
-                                    className="normal-case text-xl text-white"
+                                    className="normal-case text-xl  px-6 py-1 text-white"
                                     activeClassName="active"
                                 >
                                     All Food Items
                                 </NavLink>
                             </>
+
+                            
                             <>
                                 <NavLink
                                     to="/blog"
@@ -126,15 +129,16 @@ const Navbar = () => {
                                     Blog
                                 </NavLink>
                             </>
-                            { user?.email && <>
+                            {user?.email && <>
                                 <NavLink
-                                    to="/addafooditem"
+                                    to="/addfooditem"
                                     className="normal-case text-xl text-white"
                                     activeClassName="active"
                                 >
-                                    Add A Food Item
+                                    Add Food Item
                                 </NavLink>
                             </>}
+                            
 
                             
 
@@ -148,10 +152,12 @@ const Navbar = () => {
                             <div className="ml-4 flex items-center md:ml-6">
                                 {user ? (
                                     <div className="flex items-center">
+                                        <Link to="/profile">
                                         <button className='flex items-center'>
                                             <img className=' rounded-full w-8 h-8 mr-3' src={user.photoURL} alt={user.displayName} />
                                             <span data-tip={user.displayName} className="text-white">{user.displayName}</span>
                                         </button>
+                                        </Link>
 
                                         <button onClick={handleLogOut} className="text-xl text-white px-3 font-medium ml-3">
                                             Logout
