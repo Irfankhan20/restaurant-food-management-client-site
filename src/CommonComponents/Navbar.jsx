@@ -138,6 +138,15 @@ const Navbar = () => {
                                     Add Food Item
                                 </NavLink>
                             </>}
+                            {user?.email && <>
+                                <NavLink
+                                    to="/orderedfooditem"
+                                    className="normal-case text-xl text-white"
+                                    activeClassName="active"
+                                >
+                                    My Ordered Food Item
+                                </NavLink>
+                            </>}
                             
 
                             

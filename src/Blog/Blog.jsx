@@ -1,8 +1,13 @@
+import { Helmet } from "react-helmet";
 
 
 const Blog = () => {
     return (
         <div className='md:w-10/12 mx-auto md:my-16'>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>MeetBox-Blog</title>
+            </Helmet>
             <div>
 
                 <div>

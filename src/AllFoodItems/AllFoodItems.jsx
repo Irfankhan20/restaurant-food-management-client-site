@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AllFoodItem from "./AllFoodItem";
+import { Helmet } from "react-helmet";
 // import { useLoaderData } from "react-router-dom";
 
 
@@ -79,6 +80,11 @@ const AllFoodItems = () => {
     return (
 
         <div>
+
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>MeetBox-All Food Items</title>
+            </Helmet>
 
             {/* slider div  */}
             <div>

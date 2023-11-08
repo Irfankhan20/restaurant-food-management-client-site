@@ -10,6 +10,7 @@ import AddFoodItem from "../AddFoodItem/AddFoodItem";
 import PrivateRoutes from "./PrivateRoutes";
 import SingleFoodPage from "../SingleFoodPage/SingleFoodPage";
 import CheckOut from "../CheckOut/CheckOut";
+import MyOrderFoodItems from "../MyOrderedFoodItems/MyOrderFoodItems";
 // import PrivateRoutes from "./PrivateRoutes";
 // import Profile from "../Profile/Profile";
 
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
           {
               path: '/addfooditem',
               element: <PrivateRoutes><AddFoodItem></AddFoodItem></PrivateRoutes>
+          },
+          {
+              path: '/orderedfooditem',
+              element: <PrivateRoutes><MyOrderFoodItems></MyOrderFoodItems></PrivateRoutes>
           },
           
           
