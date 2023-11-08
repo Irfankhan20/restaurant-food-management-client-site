@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 
 const SingleFoodPage = () => {
@@ -161,7 +161,7 @@ const SingleFoodPage = () => {
                         <h2 className="text-[35px] font-semibold pt-20 pl-4 pb-8">Price: {price} TK</h2>
                     </div>
                     
-                    <button className="w-full py-4 bg-[#E21B70] text-white text-xl font-semibold rounded-md">Proceed Checkout</button>
+                    <Link to={`/checkout/${foodItem?._id}`}><button className="w-full py-4 bg-[#E21B70] text-white text-xl font-semibold rounded-md">Proceed Checkout</button></Link>
                 </div>
             </div>
         </div>

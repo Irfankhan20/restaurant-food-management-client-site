@@ -9,6 +9,7 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import AddFoodItem from "../AddFoodItem/AddFoodItem";
 import PrivateRoutes from "./PrivateRoutes";
 import SingleFoodPage from "../SingleFoodPage/SingleFoodPage";
+import CheckOut from "../CheckOut/CheckOut";
 // import PrivateRoutes from "./PrivateRoutes";
 // import Profile from "../Profile/Profile";
 
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
           {
               path: '/singlefoodpage/:id',
               element: <SingleFoodPage></SingleFoodPage>,
+              loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
+          },
+          {
+              path: '/checkout/:id',
+              element: <CheckOut></CheckOut>,
               loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
           },
           {
