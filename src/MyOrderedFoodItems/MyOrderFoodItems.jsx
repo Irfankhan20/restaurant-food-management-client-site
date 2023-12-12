@@ -12,7 +12,7 @@ const MyOrderFoodItems = () => {
     console.log(user.email);
 
     useEffect(() => {
-        const url = `http://localhost:5000/orderFoods?email=${user?.email}`;
+        const url = `https://assignment-eleven-server-side-rho.vercel.app/orderFoods?email=${user?.email}`;
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -35,7 +35,7 @@ const MyOrderFoodItems = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/orderFoods/${id}`, {
+                fetch(`https://assignment-eleven-server-side-rho.vercel.app/orderFoods/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

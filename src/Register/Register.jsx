@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate} from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from "react-helmet";
 
 const Register = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -92,6 +93,10 @@ const Register = () => {
     }
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>MeetBox-Register</title>
+            </Helmet>
 
             <div className='my-16 md:my-20 md:w-10/12 w-11/12 mx-auto'>
                 <div className="bg-[#f8b3d1] container mx-auto lg:flex lg:flex-row items-center md:p-16 py-8 rounded-3xl  shadow-2xl">

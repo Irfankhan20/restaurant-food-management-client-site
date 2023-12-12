@@ -1,0 +1,10 @@
+/* .card-raw-css{
+    cursor: pointer;
+    transform: scale(.8);
+    transition: all .3s ease-in-out;
+} */
+
+.card-raw-css:hover{
+    background-color: #e7e0e2;
+    transform: scale(1.1);
+}

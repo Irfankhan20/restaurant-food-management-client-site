@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Link, useLoaderData } from "react-router-dom";
 
 
@@ -6,6 +7,10 @@ const SingleFoodPage = () => {
     const { photo, foodName, price, foodCategory, addByName, origin } = foodItem;
     return (
         <div className="">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>MeetBox-SingleFoodPage</title>
+            </Helmet>
             {/* slider div  */}
             <div>
                 <div className="carousel w-full h-[400px]">

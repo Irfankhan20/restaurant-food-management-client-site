@@ -22,7 +22,7 @@ const CheckOut = () => {
         console.log(orderInfo);
 
         // send data to the server 
-        fetch('http://localhost:5000/orderedfoods', {
+        fetch('https://assignment-eleven-server-side-rho.vercel.app/orderedfoods', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

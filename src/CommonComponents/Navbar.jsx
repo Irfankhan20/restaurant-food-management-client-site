@@ -23,6 +23,10 @@ const Navbar = () => {
 
 
     return (
+    
+        
+
+
         <div>
             {/* navbar  */}
             <div className="bg-[#E21B70] ">
@@ -86,6 +90,24 @@ const Navbar = () => {
                                         Add Food Item
                                     </NavLink>
                                 </li>}
+                                { user?.email && <li>
+                                    <NavLink
+                                        to="/orderedfooditem"
+                                        className="normal-case text-xl text-white"
+                                        activeClassName="active"
+                                    >
+                                        My Ordered Food Item
+                                    </NavLink>
+                                </li>}
+                                { user?.email && <li>
+                                    <NavLink
+                                        to="/myaddfooditem"
+                                        className="normal-case text-xl text-white"
+                                        activeClassName="active"
+                                    >
+                                        My Added Food Items
+                                    </NavLink>
+                                </li>}
                                 
 
                                 
@@ -147,6 +169,15 @@ const Navbar = () => {
                                     My Ordered Food Item
                                 </NavLink>
                             </>}
+                            {user?.email && <>
+                                <NavLink
+                                    to="/myaddfooditem"
+                                    className="normal-case text-xl text-white"
+                                    activeClassName="active"
+                                >
+                                    My Added Food Items
+                                </NavLink>
+                            </>}
                             
 
                             
@@ -159,6 +190,10 @@ const Navbar = () => {
                     <div className="navbar-end">
                         <div className="hidden md:block">
                             <div className="ml-4 flex items-center md:ml-6">
+                                
+
+
+
                                 {user ? (
                                     <div className="flex items-center">
                                         <Link to="/profile">
@@ -191,7 +226,9 @@ const Navbar = () => {
             </div>
 
         </div>
+    
     );
+    
 };
 
 export default Navbar;

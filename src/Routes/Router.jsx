@@ -11,6 +11,8 @@ import PrivateRoutes from "./PrivateRoutes";
 import SingleFoodPage from "../SingleFoodPage/SingleFoodPage";
 import CheckOut from "../CheckOut/CheckOut";
 import MyOrderFoodItems from "../MyOrderedFoodItems/MyOrderFoodItems";
+import MyAddedFoodItems from "../MyAddedFoodItems/MyAddedFoodItems";
+import AddFoodUpdate from "../AddFoodUpdate/AddFoodUpdate";
 // import PrivateRoutes from "./PrivateRoutes";
 // import Profile from "../Profile/Profile";
 
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
           {
               path: '/allfooditems',
               element: <AllFoodItems></AllFoodItems>,
-            //   loader: () => fetch('http://localhost:5000/foodItemsCount')
+            //   loader: () => fetch('https://assignment-eleven-server-side-rho.vercel.app/foodItemsCount')
           },
           {
               path: '/blog',
@@ -46,12 +48,12 @@ const router = createBrowserRouter([
           {
               path: '/singlefoodpage/:id',
               element: <SingleFoodPage></SingleFoodPage>,
-              loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
+              loader: ({params})=> fetch(`https://assignment-eleven-server-side-rho.vercel.app/allfoods/${params.id}`)
           },
           {
               path: '/checkout/:id',
               element: <CheckOut></CheckOut>,
-              loader: ({params})=> fetch(`http://localhost:5000/allfoods/${params.id}`)
+              loader: ({params})=> fetch(`https://assignment-eleven-server-side-rho.vercel.app/allfoods/${params.id}`)
           },
           {
               path: '/addfooditem',
@@ -60,6 +62,15 @@ const router = createBrowserRouter([
           {
               path: '/orderedfooditem',
               element: <PrivateRoutes><MyOrderFoodItems></MyOrderFoodItems></PrivateRoutes>
+          },
+          {
+              path: '/myaddfooditem',
+              element: <PrivateRoutes><MyAddedFoodItems></MyAddedFoodItems></PrivateRoutes>
+          },
+          {
+              path: '/addfoodupdate/:id',
+              element: <PrivateRoutes><AddFoodUpdate></AddFoodUpdate></PrivateRoutes>,
+              loader: ({params}) => fetch(`https://assignment-eleven-server-side-rho.vercel.app/allfoods/${params.id}`)
           },
           
           

@@ -5,7 +5,7 @@ const AllFoodItem = ({ foodItem }) => {
 
     return (
         <div className='my-16 md:w-94 w-11/12 mx-auto'>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card bg-base-100 shadow-xl ">
                 <figure><img className='object-cover image-full w-[485px] h-[485px]' src={foodItem.photo} alt="image" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">

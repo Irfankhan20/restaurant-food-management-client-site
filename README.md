@@ -1,8 +1,13 @@
-# React + Vite
+project name: Restaurant Management Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+live link: https://assignment-eleven-website.web.app
 
-Currently, two official plugins are available:
+.Handling Business Logic: Server-side code allows you to manage and execute the core business logic of your application on the server, ensuring data integrity, security, and optimal performance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+.Seamless Integration: Firebase Authentication offers easy integration with Firebase services, allowing you to secure your application with various authentication methods while benefiting from a unified ecosystem.
+
+.NoSQL Flexibility: MongoDB's flexible NoSQL data model allows you to adapt to changing data structures and types without the need for predefined schemas.
+
+.Efficient Data Display: Pagination provides an efficient way to display large datasets to users by breaking them into manageable pages, enhancing the user experience and application performance.
+
+.Stateless Authentication: JWT (JSON Web Token) enables stateless authentication, allowing your application to authenticate users without storing session state on the server, making it scalable and suitable for microservices.

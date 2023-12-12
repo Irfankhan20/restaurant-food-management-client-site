@@ -4,6 +4,8 @@ import AboutUs from "./AboutUs";
 import Banner from "./Banner";
 import OurApps from "./OurApps";
 import SixCard from "./SixCard";
+import FoodGallery from "./FoodGallery";
+import Contact from "./Contact";
 
 
 const Home = () => {
@@ -17,6 +19,8 @@ const Home = () => {
             <div className="max-w-7xl mx-auto">
             <SixCard></SixCard>
             <AboutUs></AboutUs>
+            <FoodGallery></FoodGallery>
+            <Contact></Contact>
             <OurApps></OurApps>
             
             </div>

@@ -10,7 +10,7 @@ const SixCard = () => {
     const [foodItems, setFoodItems] = useState([]);
     const [dataLength, setDataLength] = useState(6);
 
-    const url = 'http://localhost:5000/allfoods';
+    const url = 'https://assignment-eleven-server-side-rho.vercel.app/allfoods';
     useEffect(() => {
         fetch(url)
             .then(res => res.json())

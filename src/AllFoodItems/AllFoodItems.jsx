@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 // import { useLoaderData } from "react-router-dom";
 
 
+
 const AllFoodItems = () => {
 
     const [foodItems, setFoodItems] = useState([]);
@@ -17,7 +18,7 @@ const AllFoodItems = () => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        fetch('http://localhost:5000/foodItemsCount')
+        fetch('https://assignment-eleven-server-side-rho.vercel.app/foodItemsCount')
             .then(res => res.json())
             .then(data => {
                 setCount(data.count);
@@ -47,7 +48,7 @@ const AllFoodItems = () => {
         }
     }
 
-    const url = `http://localhost:5000/allfoods?page=${currentPage}&size=${itemsPerPage}`;
+    const url = `https://assignment-eleven-server-side-rho.vercel.app/allfoods?page=${currentPage}&size=${itemsPerPage}`;
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -60,17 +61,17 @@ const AllFoodItems = () => {
     //------------------------------------------------------------------------
     // search and banner and card code 
     const handleSearchChange = (event) => {
+        fetch(`https://assignment-eleven-server-side-rho.vercel.app/allfoods?page=${currentPage}&size=${itemsPerPage}&search=${event.target.value}`)
+
+        .then(res => res.json())
+        .then(data => {
+            setFoodItems(data)
+            // console.log(data);
+        })
         setSearchValue(event.target.value);
     };
 
-    // const urlForSearch = 'http://localhost:5000/allfoods';
-    // useEffect(() => {
-    //     fetch(urlForSearch)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setSearchFoodItems(data)
-    //         })
-    // }, [urlForSearch])
+    
 
     // Filter food items based on the search input
     const filteredFoodItems = foodItems.filter(foodItem => {
